@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your existing CSS file -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Add Chart.js library -->
+    <title>Dashboard</title>
+    <style>
+        /* Add additional styles specific to the dashboard if needed */
+        .dashboard-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .dashboard-container h2 {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navdiv">
+            <ul>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <h2>Pie Graph</h2>
+        <canvas id="pieChart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        // Dummy data for the pie chart
+        var pieData = {
+            labels: ['Category A', 'Category B', 'Category C'],
+            datasets: [{
+                data: [30, 40, 30],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            }]
+        };
+
+        // Get the canvas element and create the pie chart
+        var pieChartCanvas = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: pieData
+        });
+    </script>
+</body>
+</html>
