@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 async function createMainWindow() {
-  mainWindow = new BrowserWindow({ width: 800, height: 1000 });
+  mainWindow = new BrowserWindow({ width: 1000, height: 1000 });
   try {
       await mainWindow.loadFile(`${__dirname}/orders/dashboard.html`);
   } catch (error) {
