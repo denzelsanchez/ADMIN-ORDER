@@ -7,7 +7,8 @@
   
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "server": "cd ../../COMPUTER-SHOP_ORDERING && node server.js"
   },
   "author": "",
   "license": "ISC",
