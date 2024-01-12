@@ -17,7 +17,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 margin: 0;
-background-color: #cf6a04;
+background-color: #222831;
 }
 
 .navbar {
@@ -37,6 +37,7 @@ border: 1px solid black;
 .navbar li {
 float: left;
 border: 1px solid black;
+background-color: #00ADB5;
 }
 
 .navbar li a {
@@ -48,7 +49,7 @@ color: black;
 font-size: 20px;
 }
 .navbar li:hover {
-background-color: #d9d9d9;
+background-color: #006267;
 }
 
 table {
@@ -68,6 +69,10 @@ font-size: 20px;
 th {
 background-color: #f2f2f2;
 }
+
+h2 {
+    color: white;
+}
 </style>
 
     <title>Dashboard</title>
@@ -85,17 +90,17 @@ background-color: #f2f2f2;
 
     <div class="dashboard-container">
         <h2>Pie Graph</h2>
-        <canvas id="pieChart" width="200" height="200"></canvas>
+        <canvas id="pieChart" width="300" height="300"></canvas>
     </div>
 
     <script>
         // Dummy data for the pie chart
         var pieData = {
-            labels: ['Category A', 'Category B', 'Category C'],
+            labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
             datasets: [{
-                data: [30, 40, 30],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                data: [20,20,20,20,20],
+                backgroundColor: ['#0000FF', '#FF0000', '#00FF00', '#FFFF00', '#800080'],
+                hoverBackgroundColor: ['#00008B', '#8B0000','#013220', '#9B870C', '#221C35']
             }]
         };
 

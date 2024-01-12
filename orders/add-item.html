@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #222831;
+            padding-top: 50px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        label {
+            margin: 10px 0;
+            font-size: 18px;
+            color: white;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 200px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #00ADB5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #006267;
+        }
+
+        img {
+            width: 100px; /* Adjust the width of the image */
+            margin-top: 15px; /* Adjust the margin as needed */
+            display: none; /* Initially hide the image */
+        }
+
+        /* Style for the file input button */
+        #imageInput {
+            margin-top: 15px;
+            font-size: 16px;
+            display: none; /* Hide the original file input */
+        }
+
+        .custom-file-input {
+            background-color: #00ADB5;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .custom-file-input:hover {
+            background-color: #006267;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <form>
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" name="itemName">
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity">
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price">
+
+        <!-- Styled file input button -->
+        <label for="imageInput" class="custom-file-input" onclick="chooseFile()">Choose Image</label>
+        <input type="file" id="imageInput" name="imageInput" onchange="displayImage(this)">
+
+        <!-- Selected image below the "Choose Image" button -->
+        <img id="selectedImage" src="" alt="Selected Image">
+
+        <button type="button" onclick="addItem()">Add Item</button>
+
+    </form>
+
+    <script>
+        function chooseFile() {
+            document.getElementById('imageInput').click();
+        }
+
+        function displayImage(input) {
+            var img = document.getElementById('selectedImage');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                    img.style.display = 'block'; // Show the image
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function addItem() {
+            alert('The item is added!');
+            window.location.href = 'inventory.html'; // Redirect to the inventory page
+        }
+    </script>
+</body>
+</html>
