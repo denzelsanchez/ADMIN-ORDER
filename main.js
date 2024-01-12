@@ -13,7 +13,7 @@ function createWindow() {
   });
 
   // Load the index.html file
-  mainWindow.loadFile('C:/Users/Efraim Panganiban/Desktop/ADMIN ORDER NI SHIMADA/ADMIN-ORDER/orders/index.html');
+  mainWindow.loadFile('C:/Users/ADMIN/Documents/ADMIN ORDER/orders/index.html');
 
   // Open DevTools (remove this line in production)
   mainWindow.webContents.openDevTools();
