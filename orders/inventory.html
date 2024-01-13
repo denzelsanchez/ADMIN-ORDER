@@ -104,11 +104,17 @@
                     cell1.textContent = item.name;
                     cell2.textContent = '₱' + item.price;
                     cell3.innerHTML = `<img src="${item.image}" alt="${item.name}" width="50" height="50">`;
-                    cell4.textContent = item.stock;
+
+                    if(item.stock < 0){
+                        cell4.textContent = "Out of Stock";
+                    }else{
+                        cell4.textContent = item.stock;
+                    }
+                    
 
                     const markAsDoneButton = document.createElement('button');
                     markAsDoneButton.textContent = 'Increase / Decrease Stocks';
-                    markAsDoneButton.addEventListener('click', () => openStockPopup(item.name, item.stock, item._id));
+                    markAsDoneButton.addEventListener('click', () => openStockPopup(item.name, item.stock, item.id));
                     cell5.appendChild(markAsDoneButton);
                 });
             })

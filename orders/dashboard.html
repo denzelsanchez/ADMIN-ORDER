@@ -25,21 +25,39 @@
     </div>
 
     <script>
-        // Dummy data for the pie chart
-        var pieData = {
-            labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
-            datasets: [{
-                data: [20,20,20,20,20],
-                backgroundColor: ['#0000FF', '#FF0000', '#00FF00', '#FFFF00', '#800080'],
-                hoverBackgroundColor: ['#00008B', '#8B0000','#013220', '#9B870C', '#221C35']
-            }]
-        };
+        // Function to calculate weekly total sales
+        async function calculateWeeklyTotalSales() {
+            const response = await fetch('http://localhost:3000/api/orders/done');
+            const orders = await response.json();
 
-        // Get the canvas element and create the pie chart
-        var pieChartCanvas = document.getElementById('pieChart').getContext('2d');
-        var pieChart = new Chart(pieChartCanvas, {
-            type: 'pie',
-            data: pieData
+            const weeklySales = [0, 0, 0, 0, 0, 0, 0]; // Initialize array for each day of the week
+
+            orders.forEach(order => {
+                const createdAt = new Date(order.updatedAt);
+                const dayOfWeek = createdAt.getDay();
+                weeklySales[dayOfWeek] += order.total;
+            });
+
+            return weeklySales;
+        }
+
+        // Dummy data for the pie chart
+        calculateWeeklyTotalSales().then(weeklySalesData => {
+            var pieData = {
+                labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                datasets: [{
+                    data: weeklySalesData,
+                    backgroundColor: ['#0000FF', '#FF0000', '#00FF00', '#FFFF00', '#800080', '#FFA500', '#008080'],
+                    hoverBackgroundColor: ['#00008B', '#8B0000','#013220', '#9B870C', '#221C35', '#B87333', '#2F4F4F']
+                }]
+            };
+
+            // Get the canvas element and create the pie chart
+            var pieChartCanvas = document.getElementById('pieChart').getContext('2d');
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData
+            });
         });
     </script>
 </body>
