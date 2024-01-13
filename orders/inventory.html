@@ -22,16 +22,69 @@
             <th>Name</th>
             <th>Price</th>
             <th>Image</th>
+            <th>Stocks</th>
+            <th>Modify</th>
         </tr>
     </table>
 
-    <button class="add-item-button" onclick="openPopup()">Add Item</button>
+    <button class="add-item-button" onclick="goAddItemPage()">Add Item</button>
+
+    <div class="popup-stock">
+        <div>
+            <p class="description-productId"></p>
+            <p class="description-productName"></p>
+            <p class="description-productStock"></p>
+            <p style="text-align: center;">Note : Use Negative Value if you want to Decrease Stock</p>
+        </div>
+        <label for="name">Enter Stock Value:</label>
+        <input id="stockInput" type="number" required>
+        
+        <button type="button" onclick="modifyStock()">Modify</button>
+        <button type="button" onclick="closeStockPopup()">Cancel</button>
+    </div>
 
     <script>
-        const products = [];
+        const stockPopup = document.querySelector('.popup-stock');
 
-        function openPopup() {
+        function goAddItemPage() {
             window.location.href = 'add-item.html';
+        }
+
+        function openStockPopup(productName, currentStock, productId) {
+            const idDescription = stockPopup.querySelector('.description-productId');
+            const nameDescription = stockPopup.querySelector('.description-productName');
+            const stockDescription = stockPopup.querySelector('.description-productStock');
+            idDescription.textContent = `Product ID : ${productId}`
+            nameDescription.textContent = `Product Name : ${productName}`;
+            stockDescription.textContent = `Current Stock : ${currentStock}`;
+            stockPopup.style.display = "flex";
+        }
+
+        function closeStockPopup() {
+            stockPopup.style.display = "none";
+        }
+
+        function modifyStock() {
+            const productId = stockPopup.querySelector('.description-productId').textContent.split(': ')[1];
+            const stockInput = document.getElementById('stockInput');
+            const quantity = stockInput.value;
+
+            fetch(`http://localhost:3000/api/Products/${productId}/addStock`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ quantity: quantity }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Optionally, you can update the UI or perform other actions
+                alert("The Stock Modified Successfully");
+                closeStockPopup();
+                location.reload()
+            })
+            .catch(error => console.error('Error modifying stock:', error));
         }
 
         // Fetch data and populate the table
@@ -45,10 +98,18 @@
                     const cell1 = row.insertCell(0);
                     const cell2 = row.insertCell(1);
                     const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    const cell5 = row.insertCell(4);
 
                     cell1.textContent = item.name;
-                    cell2.textContent = item.price + '$';
+                    cell2.textContent = '₱' + item.price;
                     cell3.innerHTML = `<img src="${item.image}" alt="${item.name}" width="50" height="50">`;
+                    cell4.textContent = item.stock;
+
+                    const markAsDoneButton = document.createElement('button');
+                    markAsDoneButton.textContent = 'Increase / Decrease Stocks';
+                    markAsDoneButton.addEventListener('click', () => openStockPopup(item.name, item.stock, item._id));
+                    cell5.appendChild(markAsDoneButton);
                 });
             })
             .catch(error => console.error('Error fetching data:', error));

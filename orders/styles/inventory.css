@@ -1,5 +1,6 @@
-
-        * {
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap');
+        
+    * {
             text-decoration: none;
         }
 
@@ -9,6 +10,7 @@
             align-items: center;
             margin: 0;
             background-color: #222831;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .navbar {
@@ -76,4 +78,55 @@
 
         .add-item-button :hover {
             background-color: #006267;;
+        }
+        
+        button {
+            padding: 8px 12px;
+            margin-right: 5px;
+            width: 85px;
+            cursor: pointer;
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .popup-stock{
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background-color: white;
+            border: black 1px solid;
+            position: absolute;
+            height: auto;
+            width: 300px;
+            padding: 30px 20px 30px 20px;
+            border-radius: 40px;
+            top: 50%;
+        }
+
+        .popup-stock p{
+            font-size: 20px;
+        }
+
+        .popup-stock label{
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .popup-stock input{
+            height: 80px;
+            width: 100px;
+            line-height: 80px;
+            text-align: center;
+            font-size: 30px; 
+        }
+
+        .popup-stock button{
+            height: 40px;
+            text-transform: uppercase;
+            background-color: #006267;
+            font-weight: 700;
         }
