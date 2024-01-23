@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 async function createMainWindow() {
   mainWindow = new BrowserWindow({ width: 1000, height: 1000 });
   try {
-      await mainWindow.loadFile(`${__dirname}/orders/dashboard.html`);
+      await mainWindow.loadFile(`${__dirname}/orders/orders.html`);
   } catch (error) {
       console.error('Error loading file:', error.message);
   }
